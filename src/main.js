@@ -2,16 +2,10 @@ const { app, BrowserWindow,ipcMain } = require('electron');
 const path = require('path');
 const { contextIsolated } = require('process');
 
-
-
-
-
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
-
 
 const createWindow = () => {
   // Create the browser window.
@@ -36,15 +30,6 @@ const createWindow = () => {
       if(err) {mainWindow.webContents.send('clo',err);return}
       else mainWindow.webContents.send('clo',data);
    });
-  //  python.on("close",()=>{
-  //    console.log('kaslsd')
-  //    ipcMain.send("clo","asdsd");
-  //  })
-    // const python = require("child_process").spawn("python", ['src/linkedinbot.py',args,(err,data)=>{
-    //   console.log(args)
-    //   if(err) {console.log(err);return}
-    //   else console.log(data);
-    // }]);
     event.reply('rev','started');
   })
 };
