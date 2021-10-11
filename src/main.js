@@ -1,6 +1,38 @@
-const { app, BrowserWindow,ipcMain } = require('electron');
+const {app,BrowserWindow,ipcMain} = require('electron');
 const path = require('path');
-const { contextIsolated } = require('process');
+const {contextIsolated} = require('process');
+const { remote } = require('electron')
+
+const Cred = require('electron-store');
+cred = new Cred();
+
+
+// set key and value pair to use it later 
+ipcMain.on('setValue', (event, [key, value]) => {
+  console.warn(key);
+  console.warn(value);
+  cred.set(key, value);
+});
+// get the value of key 
+ipcMain.on('getValue', (event, [key, value]) => {
+  cred.get(key, value);
+});
+
+// run the exe file 
+
+ipcMain.on("runexefile", (event, args) => {
+  args.unshift(cred.get('password'));
+  args.unshift(cred.get('username'));
+  // console.warn(args);
+  const python = require("child_process").execFile(require('path').normalize('./py/LinkedinBot.exe'), args, (err, data) => {
+    if (err) {
+      mainWindow.webContents.send('clo', err);
+      return
+    } else mainWindow.webContents.send('clo', data);
+  });
+  
+  event.reply('ver', 'started');
+})
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -12,36 +44,27 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences:{
-      nodeIntegration:true,
+    webPreferences: {
+      nodeIntegration: true,
       contextIsolation: false
     }
   });
+  mainWindow.maximize();
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
+  mainWindow.loadFile(path.join(__dirname, 'login.html'));
+  ipcMain.on("renRam", (event, args) => {
+    console.log('rendered Random.html');
+    // mainWindow.loadFile(path.join(__dirname,'random.html'));
+    mainWindow.loadFile(path.join(__dirname,'random.html'));
+    // mainWindow.reload();
+  });
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
-  ipcMain.on("msg",(event,args)=>{
-    console.log(args)
-    const python = require("child_process").execFile(require('path').normalize('./py/LinkedinBot.exe'), args,(err,data)=>{
-      console.log(args);
-      if(err) {mainWindow.webContents.send('clo',err);return}
-      else mainWindow.webContents.send('clo',data);
-   });
-    event.reply('rev','started');
-  })
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -49,12 +72,21 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+
+
+// ipcMain.on("msg", (event, args) => {
+//   console.warn(args);
+//   const python = require("child_process").execFile(require('path').normalize('./py/LinkedinBot.exe'), args, (err, data) => {
+//     console.warn(args);
+//     if (err) {
+//       mainWindow.webContents.send('clo', err);
+//       return
+//     } else mainWindow.webContents.send('clo', data);
+//   });
+//   event.reply('rev', 'started');
+// })
