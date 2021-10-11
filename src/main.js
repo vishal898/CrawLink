@@ -52,11 +52,11 @@ const createWindow = () => {
   mainWindow.maximize();
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'login.html'));
+  mainWindow.loadFile(path.join(__dirname, 'html/login.html'));
   ipcMain.on("renRam", (event, args) => {
     console.log('rendered Random.html');
     // mainWindow.loadFile(path.join(__dirname,'random.html'));
-    mainWindow.loadFile(path.join(__dirname,'random.html'));
+    mainWindow.loadFile(path.join(__dirname,'html/random.html'));
     // mainWindow.reload();
   });
   // Open the DevTools.
