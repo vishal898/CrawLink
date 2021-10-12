@@ -1,0 +1,69 @@
+body {
+    align-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: auto;
+    max-width: 38rem;
+    padding: 2rem;
+  }
+/* input {
+width:350px;
+display: inline-block;
+} */
+
+.form-control{
+  color: white;
+  margin-left:5%;
+  margin-right:5%;
+  margin-top:0.2%;
+  margin-bottom:2.5%;
+  width:220px;
+  box-sizing: border-box;
+  background-color:  rgb(226, 224, 224);
+}
+
+h1{
+  text-align: center;
+  font-family: 'Aclonica', sans-serif;
+  margin-top: 10px;
+}
+
+label{
+  font-size: large;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn{
+  border-radius: 30px;
+  margin: 0.1%;
+}
+
+ul{
+  color:cyan;
+}
+
+.form-control::placeholder { 
+  color:rgb(146, 144, 144);
+
+}
+.btn-danger{
+  background-color:rgb(224, 146, 28);
+}
+.scroll {
+  height:100px;
+  overflow-y: auto;
+}
+
+#a1:hover{
+  background-color: rgb(59, 179, 69);
+}
+#a2:hover{
+  background-color: rgb(59, 179, 69);
+}
+#a3:hover{
+  background-color: rgb(59, 179, 69);
+}
+#a4:hover{
+  background-color: rgb(59, 179, 69);
+}

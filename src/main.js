@@ -23,8 +23,8 @@ ipcMain.on('getValue', (event, [key, value]) => {
 ipcMain.on("runexefile", (event, args) => {
   args.unshift(cred.get('password'));
   args.unshift(cred.get('username'));
-  // console.warn(args);
-  const python = require("child_process").execFile(require('path').normalize('./py/LinkedinBot.exe'), args, (err, data) => {
+  console.warn(args);
+  const python = require("child_process").execFile(require('path').normalize('./py/sendMessToPeople.exe'), args, (err, data) => {
     if (err) {
       mainWindow.webContents.send('clo', err);
       return
@@ -52,13 +52,27 @@ const createWindow = () => {
   mainWindow.maximize();
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'html/login.html'));
+  console.warn(cred.get('username'));
+  console.warn(cred.get('password'));
+  
+  // if(cred.get('username')===null || cred.get('password')===null){
+  mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
+
+
   ipcMain.on("renRam", (event, args) => {
     console.log('rendered Random.html');
     // mainWindow.loadFile(path.join(__dirname,'random.html'));
-    mainWindow.loadFile(path.join(__dirname,'html/random.html'));
+    mainWindow.loadFile(path.join(__dirname,'home/home.html'));
     // mainWindow.reload();
   });
+  // }
+  // else{
+  //     console.log('rendered Random.html');
+  //     // mainWindow.loadFile(path.join(__dirname,'random.html'));
+  //     mainWindow.loadFile(path.join(__dirname,'random/random.html'));
+  //     // mainWindow.reload();
+  // }
+  
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 };
