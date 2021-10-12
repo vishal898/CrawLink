@@ -56,13 +56,13 @@ const createWindow = () => {
   console.warn(cred.get('password'));
   
   // if(cred.get('username')===null || cred.get('password')===null){
-  mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
-
+   //mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
+   mainWindow.loadFile(path.join(__dirname,'home/home.html'));
 
   ipcMain.on("renRam", (event, args) => {
     console.log('rendered Random.html');
     // mainWindow.loadFile(path.join(__dirname,'random.html'));
-    mainWindow.loadFile(path.join(__dirname,'home/home.html'));
+    mainWindow.loadFile(path.join(__dirname,'withdraw/withdraw.html'));
     // mainWindow.reload();
   });
   // }
