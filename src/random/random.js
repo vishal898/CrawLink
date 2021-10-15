@@ -1,6 +1,16 @@
 const {
     ipcRenderer
 } = require('electron');
+
+document.querySelector('a').addEventListener('click',(e)=>{
+    e.preventDefault()
+    let p = document.querySelector('a').getAttribute("href");
+    console.log(p);
+    // setInterval(()=>{
+        ipcRenderer.send("renderPage",[{page:p}]);
+    // },10000);
+});
+
 document.getElementById("submit").addEventListener('click',(e)=>{
     e.preventDefault();
     console.log('form submitted');
@@ -14,7 +24,7 @@ document.getElementById("submit").addEventListener('click',(e)=>{
     }
     
     document.getElementById("ul1").querySelectorAll('li').forEach((item, index) => {
-      locs.push(item.innerText);
+        locs.push(item.innerText);
     });
     
     document.getElementById("ul2").querySelectorAll('li').forEach((item, index) => {
@@ -46,7 +56,7 @@ document.getElementById("ul1").addEventListener("click", remove1);
 function renderList1(lst) {
     let lt = "";
     for (let i = 0; i < lst.length; i++) {
-        lt += `<li value="${i}" >${lst[i]}</li>`;
+        lt += `<li class="tag" value="${i}" >${lst[i]}</li>`;
     }
     if (lt) document.getElementById("ul1").innerHTML = lt;
     else document.getElementById("ul1").innerHTML = "Nothing Added Yet";
@@ -84,7 +94,7 @@ document.getElementById("ul2").addEventListener("click", remove2);
 function renderList2(lst) {
     let lt = "";
     for (let i = 0; i < lst.length; i++) {
-        lt += `<li value="${i}" >${lst[i]}</li>`;
+        lt += `<li class="tag" value="${i}" >${lst[i]}</li>`;
     }
     if (lt) document.getElementById("ul2").innerHTML = lt;
     else document.getElementById("ul2").innerHTML = "Nothing Added Yet";

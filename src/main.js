@@ -49,6 +49,7 @@ const createWindow = () => {
       contextIsolation: false
     }
   });
+  
   mainWindow.maximize();
 
   // and load the index.html of the app.
@@ -56,22 +57,29 @@ const createWindow = () => {
   console.warn(cred.get('password'));
   
   // if(cred.get('username')===null || cred.get('password')===null){
-   //mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
-   mainWindow.loadFile(path.join(__dirname,'home/home.html'));
+   mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
+  //  mainWindow.loadFile(path.join(__dirname,'home/home.html'));
 
   ipcMain.on("renRam", (event, args) => {
-    console.log('rendered Random.html');
+    // console.warn(`rendered ${args.page}`);
     // mainWindow.loadFile(path.join(__dirname,'random.html'));
     mainWindow.loadFile(path.join(__dirname,'withdraw/withdraw.html'));
     // mainWindow.reload();
   });
   // }
   // else{
-  //     console.log('rendered Random.html');
+  //     console.warm('rendered Random.html');
   //     // mainWindow.loadFile(path.join(__dirname,'random.html'));
   //     mainWindow.loadFile(path.join(__dirname,'random/random.html'));
   //     // mainWindow.reload();
   // }
+
+  ipcMain.on("renderPage", (event, args) => {
+    // console.warn(`rendered ${args.page}`);
+    // mainWindow.loadFile(path.join(__dirname,'random.html'));
+    mainWindow.loadFile(path.join(__dirname,args[0].page));
+    // mainWindow.reload();
+  });
   
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();

@@ -24,7 +24,7 @@ document.getElementById("submit").addEventListener('click',()=>{
     console.log(p);
     ipcRenderer.send("setValue",["username", u]);
     ipcRenderer.send("setValue",["password", p]);
-    ipcRenderer.send("renRam");
+    ipcRenderer.send("renderPage",[{page:'home/home.html'}]);
 });
 
 
