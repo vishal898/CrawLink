@@ -8,11 +8,11 @@ document.getElementById("1").addEventListener('click',()=>{
 });
 document.getElementById("2").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'login/login.html'}]);
+    ipcRenderer.send("renderPage",[{page:'withdraw/withdraw.html'}]);
 });
 document.getElementById("3").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'accept/accept.html'}]);
 });
 document.getElementById("4").addEventListener('click',()=>{
     console.log('card cliked');

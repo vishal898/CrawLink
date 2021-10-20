@@ -2,6 +2,8 @@ const {
     ipcRenderer
 } = require('electron');
 
+
+
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
     let p = document.querySelector('a').getAttribute("href");
@@ -124,6 +126,9 @@ function clearList2() {
         renderList2(list[2]);
     }
 }
+
+
+  
 
 
 // document.getElementById("messForm").addEventListener('submit',(e)=>{
