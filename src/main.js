@@ -35,7 +35,7 @@ ipcMain.on("runexefile", (event, args) => {
       // mainWindow.webContents.send('clo', err);
   });
   python.on('exit',()=>{
-    event.reply('ver', 'started');
+    event.reply('filltable', 'started');
   });
   
 })
@@ -88,21 +88,23 @@ const createWindow = () => {
   });
   
   ipcMain.on("readCsvFile", (event, args) => {
-    console.warn(' csv started reading')
+    console.warn('Csv started reading')
+    // console.warn(args[0]);
     const file = fs.createReadStream(args[0]);
     let csvData=[];
     csv.parse(file, {
       header: true,
       step: function(result) {
-          csvData.push(result.data)
+        // console.warn(result.data);
+        csvData.push(result.data);
       },
       complete: function(results, file) {
           console.warn('Complete', csvData, 'records.'); 
           event.reply('tableData', csvData);
       }
     });
-
   });
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 };
