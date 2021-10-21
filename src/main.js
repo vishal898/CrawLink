@@ -1,7 +1,9 @@
 const {app,BrowserWindow,ipcMain} = require('electron');
 const path = require('path');
 const {contextIsolated} = require('process');
-const { remote } = require('electron')
+const { remote } = require('electron');
+const fs = require('fs');
+const csv = require('papaparse');
 
 const Cred = require('electron-store');
 cred = new Cred();
@@ -24,14 +26,16 @@ ipcMain.on("runexefile", (event, args) => {
   args.unshift(cred.get('password'));
   args.unshift(cred.get('username'));
   console.warn(args);
-  const python = require("child_process").execFile(require('path').normalize('./py/sendMessToPeople.exe'), args, (err, data) => {
+  const python = require("child_process").execFile(require('path').normalize('./py/sendMessToPeopleOld.exe'), args, (err, data) => {
     if (err) {
       mainWindow.webContents.send('clo', err);
       return
     } else mainWindow.webContents.send('clo', data);
   });
+  python.on('exit',()=>{
+    event.reply('ver', 'started');
+  });
   
-  event.reply('ver', 'started');
 })
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -57,30 +61,46 @@ const createWindow = () => {
   console.warn(cred.get('password'));
   
   // if(cred.get('username')===null || cred.get('password')===null){
-   mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
-  //  mainWindow.loadFile(path.join(__dirname,'home/home.html'));
+  //  mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
+   mainWindow.loadFile(path.join(__dirname,'home/home.html'));
 
   ipcMain.on("renRam", (event, args) => {
     // console.warn(`rendered ${args.page}`);
-    // mainWindow.loadFile(path.join(__dirname,'random.html'));
+    // mainWindow.loadFile(path.join(__dirname,'connection.html'));
     mainWindow.loadFile(path.join(__dirname,'withdraw/withdraw.html'));
     // mainWindow.reload();
   });
   // }
   // else{
-  //     console.warm('rendered Random.html');
-  //     // mainWindow.loadFile(path.join(__dirname,'random.html'));
-  //     mainWindow.loadFile(path.join(__dirname,'random/random.html'));
+  //     console.warm('rendered Connection.html');
+  //     // mainWindow.loadFile(path.join(__dirname,'connection.html'));
+  //     mainWindow.loadFile(path.join(__dirname,'connection/connection.html'));
   //     // mainWindow.reload();
   // }
 
   ipcMain.on("renderPage", (event, args) => {
     // console.warn(`rendered ${args.page}`);
-    // mainWindow.loadFile(path.join(__dirname,'random.html'));
+    // mainWindow.loadFile(path.join(__dirname,'connection.html'));
     mainWindow.loadFile(path.join(__dirname,args[0].page));
     // mainWindow.reload();
   });
   
+  ipcMain.on("readCsvFile", (event, args) => {
+    console.warn(' csv started reading')
+    const file = fs.createReadStream(args[0]);
+    let csvData=[];
+    csv.parse(file, {
+      header: true,
+      step: function(result) {
+          csvData.push(result.data)
+      },
+      complete: function(results, file) {
+          console.warn('Complete', csvData, 'records.'); 
+          event.reply('tableData', csvData);
+      }
+    });
+
+  });
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 };

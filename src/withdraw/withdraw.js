@@ -1,6 +1,13 @@
 const { ipcRenderer } = require('electron');
-ipcRenderer.send("renRam");
 
+document.querySelector('a').addEventListener('click',(e)=>{
+    e.preventDefault()
+    let p = document.querySelector('a').getAttribute("href");
+    console.log(p);
+    // setInterval(()=>{
+        ipcRenderer.send("renderPage",[{page:p}]);
+    // },10000);
+});
 
 
 let cnt,br,newListItem;
