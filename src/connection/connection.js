@@ -130,7 +130,7 @@ function clearList2() {
 
 // add row to table
 
-document.getElementById("submit").addEventListener('click',(e)=>{
+document.getElementById("submit").addEventListener('submit',(e)=>{
 
     
     let down = document.createElement("a");
