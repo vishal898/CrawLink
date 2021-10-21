@@ -46,11 +46,16 @@ document.getElementById("submit").addEventListener('click', (e) => {
         // document.getElementById("submit").addEventListener('click', (e) => {
 
             let down = document.createElement("a");
-            down.href = "sendMessToPeopleOld.csv";
-            down.innerHTML = "Download";
+            down.href =  "C:/Users/Kshitij/OneDrive - walchandsangli.ac.in/Desktop/ElectronJs/CrawLink/sendMessToPeopleOld.csv";
+            down.innerHTML ="Download";
             down.type = "text/csv";
             down.download = "sendMessToPeopleOld.csv";
-            document.querySelector('.table-wrapper').appendChild(down);
+            down.style.color = "white";
+            down.style.textDecoration = "inherit";
+            let btn = document.createElement("button");
+            btn.className = "btn btn-success";
+            btn.style.marginBottom = "25px";
+            btn.appendChild(down);
 
             let table = document.createElement('table');
             let thead = document.createElement('thead');

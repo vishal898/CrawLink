@@ -28,9 +28,11 @@ ipcMain.on("runexefile", (event, args) => {
   console.warn(args);
   const python = require("child_process").execFile(require('path').normalize('./py/sendMessToPeopleOld.exe'), args, (err, data) => {
     if (err) {
-      mainWindow.webContents.send('clo', err);
-      return
-    } else mainWindow.webContents.send('clo', data);
+      console.warn(err);
+    }else{
+      console.warn(data);
+    }
+      // mainWindow.webContents.send('clo', err);
   });
   python.on('exit',()=>{
     event.reply('ver', 'started');
