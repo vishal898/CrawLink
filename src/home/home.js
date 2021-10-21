@@ -20,17 +20,17 @@ document.getElementById("4").addEventListener('click',()=>{
 });
 document.getElementById("5").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
 });
 document.getElementById("6").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
 });
 document.getElementById("7").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
 });
 document.getElementById("8").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
 });
