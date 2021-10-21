@@ -111,7 +111,7 @@ font-family: 'Asap', sans-serif; 98cfd9
 */
 
 body {
-  /* background-image: url("bg-link.svg"); */
+  background-image: url("bg-link.svg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;

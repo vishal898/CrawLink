@@ -1,9 +1,5 @@
 const { ipcRenderer } = require('electron');
 
-
-
-
-
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
     let p = document.querySelector('a').getAttribute("href");
@@ -17,10 +13,8 @@ document.querySelector('a').addEventListener('click',(e)=>{
 
 
 
-
 // add row to table
 let cnt,br,newListItem;
-
 
 document.getElementById("submit").addEventListener('click',(e)=>{
     e.preventDefault();
