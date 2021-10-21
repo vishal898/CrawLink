@@ -4,7 +4,7 @@ const { ipcRenderer } = require('electron');
 console.log('home page');
 document.getElementById("1").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
 });
 document.getElementById("2").addEventListener('click',()=>{
     console.log('card cliked');
@@ -16,7 +16,7 @@ document.getElementById("3").addEventListener('click',()=>{
 });
 document.getElementById("4").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'random/random.html'}]);
+    ipcRenderer.send("renderPage",[{page:'notification/notification.html'}]);
 });
 document.getElementById("5").addEventListener('click',()=>{
     console.log('card cliked');

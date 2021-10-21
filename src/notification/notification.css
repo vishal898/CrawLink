@@ -236,6 +236,9 @@ header {
   justify-content: center;
   align-items: center;
 }
+#count {
+  width: 100%;
+}
 
 #submit {
   background-color: rgb(33, 99, 153);
@@ -248,7 +251,8 @@ strong {
 }
 
 a.previous {
-  float: right;
+  float: left;
+  position: fixed;
   background-color: #3560a1;
   color: rgb(255, 255, 255);
 }

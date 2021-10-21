@@ -111,7 +111,8 @@ font-family: 'Asap', sans-serif; 98cfd9
 */
 
 body {
-  background-image: url("bg-link.svg");
+  /* background-image: url("bg-link.svg"); */
+  background-image: url("bglink.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
@@ -222,8 +223,8 @@ header {
   width: 750px;
 
   /* padding-left: 10px;
-    padding-right: 10px;
-    padding-top:30px; */
+  padding-right: 10px;
+  padding-top:30px; */
 }
 .scroll {
   display: flex;
@@ -235,9 +236,6 @@ header {
 
   justify-content: center;
   align-items: center;
-}
-#count {
-  width: 100%;
 }
 
 #submit {

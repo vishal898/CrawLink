@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Accept Page</title>
-  <link rel="stylesheet" href="withdraw.css">
+  <title>Notification Page</title>
+  <link rel="stylesheet" href="notification.css">
   <!-- <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/bootstrap.min.js" defer ></script> -->
   <link href="https://fonts.googleapis.com/css?family=Asap|Comfortaa|Gudea|Hind+Guntur|Hind+Madurai|Hind+Vadodara|Maven+Pro|Ropa+Sans|Niconne|Source+Code+Pro" rel="stylesheet">
@@ -21,13 +21,13 @@
   <a href="home/home.html" class="previous round btn btn-info" type="button">Back</a>
   <center>
 <div id="mainFrame">
-  <header>LinkedIn Invitation Withdrawer</header>
+  <header>Linkedin Notification Bot</header>
   <br><br>
   <form id="messForm">
    
     <div class="formdiv">
     <div class="form-group">
-      <label style="float:left;"><strong>Enter no. of invitations to wihdraw(1-25)</strong>  </label>
+      <label style="float:left;"> <strong>Enter no. of notification to respond(1-25)</strong>  </label>
       <br><br>
       <div class="input-group">
         <input type="number" id="count"  required="true" min="1" max="25"/>
@@ -40,19 +40,16 @@
     <br><br>
     
     </div>
-    <input   type="submit" id="submit" class="btn btn-primary btn-block btn-large" >
+    <input   type="submit" id="submit" class="btn btn-primary btn-block btn-large" onclick="detailssubmit()">
     <!-- <input type="submit" value="Submit" class="btn btn-primary btn-block btn-large"> -->
   </form>
   <br><br><br><hr>
-  <section class="table-wrapper">
-    
-  </section>
   
 </div>
 
 </center>
 
-<script defer src="withdraw.js"></script>
+<script defer src="notification.js"></script>
 </body>
 
 
