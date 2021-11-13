@@ -1,6 +1,5 @@
 const { ipcRenderer } = require('electron');
 
-
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
     let p = document.querySelector('a').getAttribute("href");
@@ -9,20 +8,20 @@ document.querySelector('a').addEventListener('click',(e)=>{
         ipcRenderer.send("renderPage",[{page:p}]);
     // },10000);
 });
+// const path = require('path');
+// const bgImgPath = path.join(__dirname, '../bglink.png');
+// console.log(__dirname);
 
+// document.body.style.backgroundImage ="url("+bgImgPath+")";
 
-
-
-
-
-// add row to table
 let cnt,br,newListItem;
 
 
-document.getElementById("submit").addEventListener('click',(e)=>{
-    e.preventDefault();
+// add row to table
+function sub (event)  {
+    event.preventDefault();
+    document.getElementById("submit").disabled = true;
     console.log('form submitted');
-
     document.getElementById("count").required = true
     cnt=document.getElementById("count").value;
     if(cnt>25)
@@ -96,25 +95,22 @@ document.getElementById("submit").addEventListener('click',(e)=>{
 
             // tbody.appendChild(`<tr><th>${index}<th><th>${row.Name}<th><th>${row.Email}<th></tr>`);
         });
-        
-    })
-    // let myTbody = document.querySelector("table>tbody");
-    // let newRow = myTbody.insertRow();
-    // newRow.insertCell().append("New data");
-    // newRow.insertCell().append("New data");
+    });
+    // ipcRenderer.on('clo', (event, arg) => {
+    //     console.log(arg);
+    // })
+} 
+
+document.getElementById("refresh",()=>{
+    let p = document.querySelector('a').getAttribute("href");
+    console.log(p);
+    // setInterval(()=>{
+    ipcRenderer.send("renderPage", [{
+        page: p
+    }]);
 });
-  
 
 
-// document.getElementById("messForm").addEventListener('submit',(e)=>{
-//     e.preventDefault();
-//     console.log('form submitted');
-//     let connection = document.getElementById('connection').value
-//     ipcRenderer.send("runexefile",[connection]);
-//     ipcRenderer.on('ver', (event, arg) => {
-//         console.log("exe file started");
-//     })
-//     ipcRenderer.on('clo', (event, arg) => {
-//         console.log(arg);
-//     })
-// });
+document.getElementById("submit").addEventListener('click',sub );
+
+
