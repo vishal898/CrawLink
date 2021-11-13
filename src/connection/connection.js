@@ -51,6 +51,12 @@ function sub (event)  {
     ipcRenderer.send("runexefile", ['./py/sendMessToPeopleOld.exe',conns, locs, comps,mess]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
+        const title = "Table is Created";
+        const bodyText = "Table is Created";
+        const notification = new Notification(title,{
+        body:bodyText,
+        });
+        
         // add row to table
             
         let down = document.createElement("a");

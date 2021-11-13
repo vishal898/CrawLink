@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain} = require('electron');
+const {app,BrowserWindow,ipcMain,Notification} = require('electron');
 const path = require('path');
 const {contextIsolated} = require('process');
 const { remote } = require('electron');
@@ -11,8 +11,6 @@ cred = new Cred();
 
 // set key and value pair to use it later 
 ipcMain.on('setValue', (event, [key, value]) => {
-  console.warn(key);
-  console.warn(value);
   cred.set(key, value);
 });
 // get the value of key 
@@ -54,6 +52,13 @@ ipcMain.on("runexefile", (event, args) => {
     }
       // mainWindow.webContents.send('clo', err);
   });
+  python.on('spawn',()=>{
+    console.warn('script started');
+    new Notification({
+      title:"Script Started",
+      body:"Selenium script has started",
+    }).show();
+  });
   python.on('exit',()=>{
     event.reply('filltable', 'started');
   });
@@ -82,16 +87,15 @@ const createWindow = () => {
   console.warn(cred.get('username'));
   console.warn(cred.get('password'));
   
-  // if(cred.get('username')===null || cred.get('password')===null){
-  //  mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
-   mainWindow.loadFile(path.join(__dirname,'home/home.html'));
+  if(cred.get('username')==="" || cred.get('password')==="") mainWindow.loadFile(path.join(__dirname, 'login/login.html'));
+  else mainWindow.loadFile(path.join(__dirname,'home/home.html'));
 
-  ipcMain.on("renRam", (event, args) => {
-    // console.warn(`rendered ${args.page}`);
-    // mainWindow.loadFile(path.join(__dirname,'connection.html'));
-    mainWindow.loadFile(path.join(__dirname,'withdraw/withdraw.html'));
-    // mainWindow.reload();
-  });
+  // ipcMain.on("renRam", (event, args) => {
+  //   // console.warn(`rendered ${args.page}`);
+  //   // mainWindow.loadFile(path.join(__dirname,'connection.html'));
+  //   mainWindow.loadFile(path.join(__dirname,'withdraw/withdraw.html'));
+  //   // mainWindow.reload();
+  // });
   // }
   // else{
   //     console.warm('rendered Connection.html');
