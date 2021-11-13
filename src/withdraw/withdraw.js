@@ -1,9 +1,6 @@
 const { ipcRenderer } = require('electron');
 
 
-
-
-
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
     let p = document.querySelector('a').getAttribute("href");
@@ -28,16 +25,21 @@ document.getElementById("submit").addEventListener('click',(e)=>{
 
     document.getElementById("count").required = true
     cnt=document.getElementById("count").value;
-    console.log(cnt);
-    if(cnt<=25)
+    if(cnt>25)
     {
-        console.log(cnt);
-        //ipcRenderer.send("count",cnt);
+        cnt = 25;
+        document.getElementById("count").value = cnt;
     }
+    if(cnt<1)
+    {
+        cnt = 1;
+        document.getElementById("count").value = cnt;
+    }
+    console.log(cnt);
 
-    
+    ipcRenderer.send("runexefile", [cnt]);
     let down = document.createElement("a");
-    down.href =  "C:/Users/Kshitij/OneDrive - walchandsangli.ac.in/Desktop/ElectronJs/CrawLink/sendMessToPeopleOld.csv";
+    down.href =  "sendMessToPeopleOld.csv";
     down.innerHTML ="Download";
     down.type = "text/csv";
     down.download = "sendMessToPeopleOld.csv";

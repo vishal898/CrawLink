@@ -22,11 +22,31 @@ ipcMain.on('getValue', (event, [key, value]) => {
 
 // run the exe file 
 
+// ipcMain.on("runexefile", (event, args) => {
+//   args.unshift(cred.get('password'));
+//   args.unshift(cred.get('username'));
+//   console.warn(args);
+//   const python = require("child_process").execFile(require('path').normalize('./py/sendMessToPeopleOld.exe'), args, (err, data) => {
+//     if (err) {
+//       console.warn(err);
+//     }else{
+//       console.warn(data);
+//     }
+//       // mainWindow.webContents.send('clo', err);
+//   });
+//   python.on('exit',()=>{
+//     event.reply('filltable', 'started');
+//   });
+// });
+
 ipcMain.on("runexefile", (event, args) => {
+  let path = args[0];
+  console.warn(path);
+  args.shift();
   args.unshift(cred.get('password'));
   args.unshift(cred.get('username'));
   console.warn(args);
-  const python = require("child_process").execFile(require('path').normalize('./py/sendMessToPeopleOld.exe'), args, (err, data) => {
+  const python = require("child_process").execFile(require('path').normalize(`${path}`), args, (err, data) => {
     if (err) {
       console.warn(err);
     }else{
@@ -38,7 +58,7 @@ ipcMain.on("runexefile", (event, args) => {
     event.reply('filltable', 'started');
   });
   
-})
+});
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require

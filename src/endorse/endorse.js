@@ -21,7 +21,6 @@ function sub (event)  {
     let conns = [];
     let comps = [];
     let locs = [];
-    let mess = ""; 
     for (let i = 1; i <= 3; i++) {
         if (document.getElementById(`${i}`).checked) {
             conns.push(document.getElementById(`${i}`).value);
@@ -35,20 +34,13 @@ function sub (event)  {
     document.getElementById("ul2").querySelectorAll('li').forEach((item, index) => {
         comps.push(item.innerText);
     });
-
-    mess = document.getElementById("message").value ; 
-
-
     conns = JSON.stringify(conns);
     locs = JSON.stringify(locs);
     comps = JSON.stringify(comps);
-
     console.log(conns);
     console.log(locs);
     console.log(comps);
-    console.log(mess);
-    
-    ipcRenderer.send("runexefile", ['./py/sendMessToPeopleOld.exe',conns, locs, comps,mess]);
+    ipcRenderer.send("runexefile", [conns, locs, comps]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
         // add row to table
@@ -174,43 +166,6 @@ function clearList1() {
     }
 }
 
-document.getElementById("b2").addEventListener("click", add2);
-document.getElementById("c2").addEventListener("click", clearList2);
-document.getElementById("ul2").addEventListener("click", remove2);
-
-function renderList2(lst) {
-    let lt = "";
-    for (let i = 0; i < lst.length; i++) {
-        lt += `<li class="tag" value="${i}" >${lst[i]}</li>`;
-    }
-    if (lt) document.getElementById("ul2").innerHTML = lt;
-   else document.getElementById("ul2").innerHTML = "";
-}
-
-function add2() {
-    word = document.getElementById("w2");
-    console.log(list[2]);
-    if (word.value)
-        list[2].push(word.value.trim());
-    word.value = '';
-    renderList2(list[2]);
-}
-
-function remove2(e) {
-    console.log("del");
-    if (list[2].length) {
-        list[2].splice(e.target.value, 1);
-        renderList2(list[2]);
-    }
-}
-
-function clearList2() {
-    console.log("del-all");
-    if (list[2].length) {
-        list[2] = [];
-        renderList2(list[2]);
-    }
-}
 
 
 // // add row to table
@@ -301,4 +256,4 @@ function clearList2() {
 //     ipcRenderer.on('clo', (event, arg) => {
 //         console.log(arg);
 //     })
-// });
+// });  
