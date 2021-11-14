@@ -1,4 +1,7 @@
-const { ipcRenderer } = require('electron');
+const {
+    ipcRenderer
+} = require('electron');
+const path = require('path');
 
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
@@ -36,12 +39,12 @@ function sub (event)  {
     }
     console.log(cnt);
 
-    ipcRenderer.send("runexefile", [cnt]);
+    ipcRenderer.send("runexefile", ['./py/notifLike.exe',cnt]);
     let down = document.createElement("a");
-    down.href =  "sendMessToPeopleOld.csv";
+    down.href =  "withdraw.csv";
     down.innerHTML ="Download";
     down.type = "text/csv";
-    down.download = "sendMessToPeopleOld.csv";
+    down.download = "withdraw.csv";
     down.style.color = "white";
     down.style.textDecoration = "inherit";
     let btn = document.createElement("button");
@@ -75,7 +78,7 @@ function sub (event)  {
 
     // read csv file 
 
-    const csvFilePath = 'sendMessToPeopleOld.csv'
+    const csvFilePath = 'withdraw.csv'
     ipcRenderer.send('readCsvFile',[csvFilePath]);
     ipcRenderer.on('tableData', (event, arg) => {
         console.log("got table data");
