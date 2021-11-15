@@ -60,6 +60,7 @@ ipcMain.on("runexefile", (event, args) => {
     }).show();
   });
   python.on('exit',()=>{
+    console.warn('script exited');
     event.reply('filltable', 'started');
   });
   
