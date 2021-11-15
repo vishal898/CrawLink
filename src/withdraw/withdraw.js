@@ -1,4 +1,7 @@
-const { ipcRenderer } = require('electron');
+const {
+    ipcRenderer
+} = require('electron');
+const path = require('path');
 
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
@@ -8,33 +11,40 @@ document.querySelector('a').addEventListener('click',(e)=>{
         ipcRenderer.send("renderPage",[{page:p}]);
     // },10000);
 });
+// const path = require('path');
+// const bgImgPath = path.join(__dirname, '../bglink.png');
+// console.log(__dirname);
 
+// document.body.style.backgroundImage ="url("+bgImgPath+")";
 
-
+let cnt,br,newListItem;
 
 
 // add row to table
-let cnt,br,newListItem;
-
-document.getElementById("submit").addEventListener('click',(e)=>{
-    e.preventDefault();
+function sub (event)  {
+    event.preventDefault();
+    document.getElementById("submit").disabled = true;
     console.log('form submitted');
-
     document.getElementById("count").required = true
     cnt=document.getElementById("count").value;
-    console.log(cnt);
-    if(cnt<=25)
+    if(cnt>25)
     {
-        console.log(cnt);
-        //ipcRenderer.send("count",cnt);
+        cnt = 25;
+        document.getElementById("count").value = cnt;
     }
+    if(cnt<1)
+    {
+        cnt = 1;
+        document.getElementById("count").value = cnt;
+    }
+    console.log(cnt);
 
-    
+    ipcRenderer.send("runexefile", ['./py/notifLike.exe',cnt]);
     let down = document.createElement("a");
-    down.href =  "C:/Users/Kshitij/OneDrive - walchandsangli.ac.in/Desktop/ElectronJs/CrawLink/sendMessToPeopleOld.csv";
+    down.href =  "withdraw.csv";
     down.innerHTML ="Download";
     down.type = "text/csv";
-    down.download = "sendMessToPeopleOld.csv";
+    down.download = "withdraw.csv";
     down.style.color = "white";
     down.style.textDecoration = "inherit";
     let btn = document.createElement("button");
@@ -68,7 +78,7 @@ document.getElementById("submit").addEventListener('click',(e)=>{
 
     // read csv file 
 
-    const csvFilePath = 'sendMessToPeopleOld.csv'
+    const csvFilePath = 'withdraw.csv'
     ipcRenderer.send('readCsvFile',[csvFilePath]);
     ipcRenderer.on('tableData', (event, arg) => {
         console.log("got table data");
@@ -88,25 +98,22 @@ document.getElementById("submit").addEventListener('click',(e)=>{
 
             // tbody.appendChild(`<tr><th>${index}<th><th>${row.Name}<th><th>${row.Email}<th></tr>`);
         });
-        
-    })
-    // let myTbody = document.querySelector("table>tbody");
-    // let newRow = myTbody.insertRow();
-    // newRow.insertCell().append("New data");
-    // newRow.insertCell().append("New data");
+    });
+    // ipcRenderer.on('clo', (event, arg) => {
+    //     console.log(arg);
+    // })
+} 
+
+document.getElementById("refresh",()=>{
+    let p = document.querySelector('a').getAttribute("href");
+    console.log(p);
+    // setInterval(()=>{
+    ipcRenderer.send("renderPage", [{
+        page: p
+    }]);
 });
-  
 
 
-// document.getElementById("messForm").addEventListener('submit',(e)=>{
-//     e.preventDefault();
-//     console.log('form submitted');
-//     let connection = document.getElementById('connection').value
-//     ipcRenderer.send("runexefile",[connection]);
-//     ipcRenderer.on('ver', (event, arg) => {
-//         console.log("exe file started");
-//     })
-//     ipcRenderer.on('clo', (event, arg) => {
-//         console.log(arg);
-//     })
-// });
+document.getElementById("submit").addEventListener('click',sub );
+
+
