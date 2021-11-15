@@ -20,35 +20,34 @@ function sub (event)  {
     console.log('form submitted');
     let conns = [];
     let comps = [];
-    let locs = [];
-    let mess = ""; 
-    for (let i = 1; i <= 3; i++) {
+    let cnt ; 
+    for (let i = 1; i <= 7; i++) {
         if (document.getElementById(`${i}`).checked) {
             conns.push(document.getElementById(`${i}`).value);
         }
     }
 
-    document.getElementById("ul1").querySelectorAll('li').forEach((item, index) => {
-        locs.push(item.innerText);
-    });
+    
 
     document.getElementById("ul2").querySelectorAll('li').forEach((item, index) => {
         comps.push(item.innerText);
     });
 
-    mess = document.getElementById("message").value ; 
+    cnt = document.getElementById("count").value ; 
 
+    if(cnt>10)
+        cnt=10;
 
     conns = JSON.stringify(conns);
-    locs = JSON.stringify(locs);
+   
     comps = JSON.stringify(comps);
 
     console.log(conns);
-    console.log(locs);
+   
     console.log(comps);
-    console.log(mess);
+    console.log(cnt);
     
-    ipcRenderer.send("runexefile", ['./py/sendMessToPeopleOld.exe',conns, locs, comps,mess]);
+    ipcRenderer.send("runexefile", ['./py/job.exe',conns, comps,cnt]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
         const title = "Table is Created";
@@ -60,10 +59,10 @@ function sub (event)  {
         // add row to table
             
         let down = document.createElement("a");
-        down.href =  "sendMessToPeopleOld.csv";
+        down.href =  "job.csv";
         down.innerHTML ="Download";
         down.type = "text/csv";
-        down.download = "sendMessToPeopleOld.csv";
+        down.download = "job.csv";
         down.style.color = "white";
         down.style.textDecoration = "inherit";
         let btn = document.createElement("button");
@@ -84,12 +83,11 @@ function sub (event)  {
         let heading_1 = document.createElement('th');
         heading_1.innerHTML = "No.";
         let heading_2 = document.createElement('th');
-        heading_2.innerHTML = "Name";
-        let heading_3 = document.createElement('th');
-        heading_3.innerHTML = "Profile Link";
+        heading_2.innerHTML = "Link";
+        
         row_1.appendChild(heading_1);
         row_1.appendChild(heading_2);
-        row_1.appendChild(heading_3);
+       
         thead.appendChild(row_1);
 
 
@@ -98,7 +96,7 @@ function sub (event)  {
         // read csv file 
 
         // const csvFilePath = 'connection/sendMessToPeopleOld.csv';
-        const csvFilePath = path.join(__dirname, 'sendMessToPeopleOld.csv');
+        const csvFilePath = path.join(__dirname, 'job.csv');
         ipcRenderer.send('readCsvFile', [csvFilePath]);
         ipcRenderer.on('tableData', (event, arg) => {
             console.log("got table data");
@@ -108,12 +106,11 @@ function sub (event)  {
                 let row_2_data_1 = document.createElement('td');
                 row_2_data_1.innerHTML = index + 1;
                 let row_2_data_2 = document.createElement('td');
-                row_2_data_2.innerHTML = row.Name;
-                let row_2_data_3 = document.createElement('td');
-                row_2_data_3.innerHTML = row.Email;
+                row_2_data_2.innerHTML = row.Email;
+                
                 row_2.appendChild(row_2_data_1);
                 row_2.appendChild(row_2_data_2);
-                row_2.appendChild(row_2_data_3);
+                
                 tbody.appendChild(row_2);
 
                 // tbody.appendChild(`<tr><th>${index}<th><th>${row.Name}<th><th>${row.Email}<th></tr>`);
@@ -142,43 +139,6 @@ let list = [
     [],
     [],
 ]
-document.getElementById("b1").addEventListener("click", add1);
-document.getElementById("c1").addEventListener("click", clearList1);
-document.getElementById("ul1").addEventListener("click", remove1);
-
-function renderList1(lst) {
-    let lt = "";
-    for (let i = 0; i < lst.length; i++) {
-        lt += `<li class="tag" value="${i}" >${lst[i]}</li>`;
-    }
-    if (lt) document.getElementById("ul1").innerHTML = lt;
-    else document.getElementById("ul1").innerHTML = "";
-}
-
-function add1() {
-    word = document.getElementById("w1");
-    console.log(list[1]);
-    if (word.value)
-        list[1].push(word.value.trim());
-    word.value = '';
-    renderList1(list[1]);
-}
-
-function remove1(e) {
-    console.log("del");
-    if (list[1].length) {
-        list[1].splice(e.target.value, 1);
-        renderList1(list[1]);
-    }
-}
-
-function clearList1() {
-    console.log("del-all");
-    if (list[1].length) {
-        list[1] = [];
-        renderList1(list[1]);
-    }
-}
 
 document.getElementById("b2").addEventListener("click", add2);
 document.getElementById("c2").addEventListener("click", clearList2);

@@ -20,11 +20,11 @@ document.getElementById("4").addEventListener('click',()=>{
 });
 document.getElementById("5").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
+    ipcRenderer.send("renderPage",[{page:'project/project.html'}]);
 });
 document.getElementById("6").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'connection/connection.html'}]);
+    ipcRenderer.send("renderPage",[{page:'job/job.html'}]);
 });
 document.getElementById("7").addEventListener('click',()=>{
     console.log('card cliked');
