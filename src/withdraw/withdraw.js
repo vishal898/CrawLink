@@ -39,7 +39,7 @@ function sub (event)  {
     }
     console.log(cnt);
 
-    ipcRenderer.send("runexefile", ['./py/notifLike.exe',cnt]);
+    ipcRenderer.send("runexefile", ['./py/withdraw.exe',cnt]);
     let down = document.createElement("a");
     down.href =  "withdraw.csv";
     down.innerHTML ="Download";
@@ -65,12 +65,11 @@ function sub (event)  {
     let heading_1 = document.createElement('th');
     heading_1.innerHTML = "No.";
     let heading_2 = document.createElement('th');
-    heading_2.innerHTML = "Name";
-    let heading_3 = document.createElement('th');
-    heading_3.innerHTML = "Profile Link";
+    heading_2.innerHTML = "Profile Link"
+    
     row_1.appendChild(heading_1);
     row_1.appendChild(heading_2);
-    row_1.appendChild(heading_3);
+   
     thead.appendChild(row_1);
 
 
@@ -88,12 +87,11 @@ function sub (event)  {
             let row_2_data_1 = document.createElement('td');
             row_2_data_1.innerHTML = index+1;
             let row_2_data_2 = document.createElement('td');
-            row_2_data_2.innerHTML = row.Name;
-            let row_2_data_3 = document.createElement('td');
-            row_2_data_3.innerHTML = row.Email;
+            row_2_data_2.innerHTML = row.Link;
+            
             row_2.appendChild(row_2_data_1);
             row_2.appendChild(row_2_data_2);
-            row_2.appendChild(row_2_data_3);
+           
             tbody.appendChild(row_2);
 
             // tbody.appendChild(`<tr><th>${index}<th><th>${row.Name}<th><th>${row.Email}<th></tr>`);
