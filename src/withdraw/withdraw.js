@@ -39,7 +39,14 @@ function sub (event)  {
     }
     console.log(cnt);
 
-    ipcRenderer.send("runexefile", ['./py/withdraw.exe',cnt]);
+    ipcRenderer.send("runexefile", ['./py/withfinal.exe',cnt]);
+    ipcRenderer.on('filltable', (event, arg) => {
+        console.log("exe file execution is over");
+        const title = "Table is Created";
+        const bodyText = "Table is Created";
+        const notification = new Notification(title,{
+        body:bodyText,
+        });
     let down = document.createElement("a");
     down.href =  "withdraw.csv";
     down.innerHTML ="Download";
@@ -77,7 +84,7 @@ function sub (event)  {
 
     // read csv file 
 
-    const csvFilePath = 'withdraw.csv'
+    const csvFilePath =  path.join(__dirname, 'withdraw.csv');
     ipcRenderer.send('readCsvFile',[csvFilePath]);
     ipcRenderer.on('tableData', (event, arg) => {
         console.log("got table data");
@@ -87,7 +94,7 @@ function sub (event)  {
             let row_2_data_1 = document.createElement('td');
             row_2_data_1.innerHTML = index+1;
             let row_2_data_2 = document.createElement('td');
-            row_2_data_2.innerHTML = row.Link;
+            row_2_data_2.innerHTML = row.link;
             
             row_2.appendChild(row_2_data_1);
             row_2.appendChild(row_2_data_2);
@@ -100,6 +107,7 @@ function sub (event)  {
     // ipcRenderer.on('clo', (event, arg) => {
     //     console.log(arg);
     // })
+});
 } 
 
 document.getElementById("refresh",()=>{
@@ -109,6 +117,7 @@ document.getElementById("refresh",()=>{
     ipcRenderer.send("renderPage", [{
         page: p
     }]);
+
 });
 
 

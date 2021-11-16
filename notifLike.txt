@@ -1,6 +1,4 @@
 started notifLike.py
-testingselenium35@gmail.com
-kala#123
-5
-login done
-adding to csv done
+vishal.borse898@gmail.com
+azlinkedin123
+2
