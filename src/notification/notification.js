@@ -25,7 +25,7 @@ function sub(event) {
         console.log(cnt);
         //ipcRenderer.send("accept",cnt);
     }
-    c= JSON.stringify(cnt);
+ 
     ipcRenderer.send("runexefile", ['./py/notifLike.exe',cnt]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
