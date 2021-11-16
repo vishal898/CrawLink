@@ -110,7 +110,7 @@ function sub (event)  {
                 let row_2_data_2 = document.createElement('td');
                 row_2_data_2.innerHTML = row.Name;
                 let row_2_data_3 = document.createElement('td');
-                row_2_data_3.innerHTML = row.Email;
+                row_2_data_3.innerHTML = row.Link;
                 row_2.appendChild(row_2_data_1);
                 row_2.appendChild(row_2_data_2);
                 row_2.appendChild(row_2_data_3);
