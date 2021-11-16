@@ -32,7 +32,7 @@ document.getElementById("7").addEventListener('click',()=>{
 });
 document.getElementById("8").addEventListener('click',()=>{
     console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'end+orse/endorse.html'}]);
+    ipcRenderer.send("renderPage",[{page:'endorse/endorse.html'}]);
 });
 
 

@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron');
+const path = require('path');
 
 document.querySelector('a').addEventListener('click',(e)=>{
     e.preventDefault()
@@ -13,7 +14,7 @@ let cnt;
 document.getElementById("submit").addEventListener('click',(e)=>{
     e.preventDefault();
     console.log('form submitted');
-
+    document.getElementById("submit").disabled = true;
     document.getElementById("count").required = true
     cnt=document.getElementById("count").value;
     console.log(cnt);
