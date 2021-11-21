@@ -38,6 +38,10 @@ ipcMain.on('getValue', (event, [key, value]) => {
 //   });
 // });
 
+
+ipcMain.on('email-request', function (event, arg) {
+  event.reply('email-reply', cred.get('username'));
+});
 ipcMain.on("runexefile", (event, args) => {
   let path = args[0];
   console.warn(path);

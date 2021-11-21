@@ -50,3 +50,8 @@ document.querySelector('#lgout').addEventListener('click', (e) => {
         page: p
     }]);
 });
+
+document.getElementById("user").addEventListener('click',()=>{
+    console.log('user cliked');
+    ipcRenderer.send("renderPage",[{page:'user/user.html'}]);
+});
