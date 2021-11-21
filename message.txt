@@ -1,9 +1,0 @@
-started message.py
-testingselenium35@gmail.com
-kala#123
-['india', 'usa']
-['amazon', 'apple']
-Hello , its automated message sorry for inconvenience its for project . You can ignore it 
-login done
-adding to csv done
-adding to csv done
