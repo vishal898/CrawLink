@@ -99,7 +99,7 @@ function sub (event)  {
                 let row_2_data_1 = document.createElement('td');
                 row_2_data_1.innerHTML = index + 1;
                 let row_2_data_2 = document.createElement('td');
-                row_2_data_2.innerHTML = row.Email;
+                row_2_data_2.innerHTML = row.Link;
                 
                 row_2.appendChild(row_2_data_1);
                 row_2.appendChild(row_2_data_2);

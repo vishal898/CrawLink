@@ -14,6 +14,29 @@ document.querySelector('a').addEventListener('click', (e) => {
     // },10000);
 });
 
+let resumePath = "";
+
+document.getElementById("resumeSubmit").addEventListener('click',()=>{
+    console.log('file button clicked');
+    // if(document.getElementById("txtFile").value){
+    //     console.log(document.getElementById("txtFile"));
+    // }
+    ipcRenderer.send('openResume');
+    ipcRenderer.on('resumeData', (event, data) => { 
+        console.log(data);
+        resumePath = data;
+        document.getElementById("resumeSpan").innerHTML = path.parse(data).base;
+        // data = data.replace('\n',' ');
+        // console.log(data);    
+        // list[1] = data.trim().split('\r',' ','\r\n');
+        // list[1] = data.trim().split();
+        // console.log(list[1]);
+        // data = list[1].join();
+        // console.log(data);
+    });
+});
+
+
 function sub (event)  {
     event.preventDefault();
     document.getElementById("submit").disabled = true;
@@ -39,7 +62,7 @@ function sub (event)  {
     console.log(comps);
     console.log(mess);
     
-    ipcRenderer.send("runexefile", ['./py/message.exe', locs, comps,mess]);
+    ipcRenderer.send("runexefile", ['./py/message.exe', locs, comps,mess,resumePath]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
         const title = "Table is Created";
@@ -101,7 +124,7 @@ function sub (event)  {
                 let row_2_data_2 = document.createElement('td');
                 row_2_data_2.innerHTML = row.Name;
                 let row_2_data_3 = document.createElement('td');
-                row_2_data_3.innerHTML = row.Email;
+                row_2_data_3.innerHTML = row.Link;
                 row_2.appendChild(row_2_data_1);
                 row_2.appendChild(row_2_data_2);
                 row_2.appendChild(row_2_data_3);

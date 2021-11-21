@@ -4,8 +4,9 @@ const {contextIsolated} = require('process');
 const { remote } = require('electron');
 const fs = require('fs');
 const csv = require('papaparse');
-
+const {dialog} = require('electron');
 const Cred = require('electron-store');
+const { type } = require('os');
 cred = new Cred();
 
 
@@ -64,6 +65,51 @@ ipcMain.on("runexefile", (event, args) => {
     event.reply('filltable', 'started');
   });
   
+});
+
+ipcMain.on('openResume', (event, path) => { 
+  console.warn('openResume clicked');
+  dialog.showOpenDialog({
+    properties: ['openFile'],
+    // filters: [
+    //   { name: 'Text File', extensions: ['txt'] },
+    // ]
+  }).then(result => {
+    console.log(result.canceled);
+    console.log(result.filePaths[0]);
+    console.warn(`resume path ->${result.filePaths[0]}`);
+    event.sender.send('resumeData', result.filePaths[0]);
+  }).catch(err => {
+    console.log(err)
+  });
+});
+
+ipcMain.on('openFile', (event, path) => { 
+  console.warn('openFile clicked');
+  dialog.showOpenDialog({
+    properties: ['openFile'],
+    filters: [
+      { name: 'Text File', extensions: ['txt'] },
+    ]
+  }).then(result => {
+    console.log(result.canceled);
+    console.log(result.filePaths[0]);
+    console.warn(`file path ->${result.filePaths[0]}`);
+    readFileFun(result.filePaths[0]);
+  }).catch(err => {
+    console.log(err)
+  });
+  function readFileFun(filepath) { 
+     fs.readFile(filepath, 'utf-8', (err, data) => { 
+        if(err){ 
+           alert("An error ocurred reading the file :" + err.message);
+           return ;
+        } 
+        console.warn(data); 
+        console.warn(typeof(data));
+        event.sender.send('fileData', [data,filepath]);
+     }) 
+  } 
 });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.

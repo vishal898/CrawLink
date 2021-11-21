@@ -56,12 +56,10 @@ document.getElementById("submit").addEventListener('click',(e)=>{
         let row_1 = document.createElement('tr');
         let heading_1 = document.createElement('th');
         heading_1.innerHTML = "No.";
-        
         let heading_2 = document.createElement('th');
         heading_2.innerHTML = "Profile Link";
         row_1.appendChild(heading_1);
         row_1.appendChild(heading_2);
-        
         thead.appendChild(row_1);
 
 

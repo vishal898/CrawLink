@@ -14,101 +14,70 @@ document.querySelector('a').addEventListener('click', (e) => {
     // },10000);
 });
 
+let list = [
+    [],
+    [],
+]
+// document.getElementById("txtFileSubmit").addEventListener('click',()=>{
+//     console.log('file submit button clicked');
+//     document.getElementById("txtFile").click();
+// });
+
+document.getElementById("txtFileSubmit").addEventListener('click',()=>{
+    console.log('file button clicked');
+    // if(document.getElementById("txtFile").value){
+    //     console.log(document.getElementById("txtFile"));
+    // }
+    ipcRenderer.send('openFile');
+    ipcRenderer.on('fileData', (event, datas) => { 
+        console.log(datas);
+        document.getElementById("fileSpan").innerHTML = path.parse(datas[1]).base;
+        let data = datas[0];
+        data = data.trim().split('\r\n');
+        data = data.join();
+        data = data.split(' ');
+        data = data.join();
+        data = data.split(',');
+        data = data.join();
+        list[1] = data.trim().split(',');
+        let tempList = list[1].filter((ele)=>{
+            return ele.length >1;
+        });
+        list[1]=tempList;
+        console.log(list[1]);
+        renderList1(list[1]);
+        // data = data.replace('\n',' ');
+        // console.log(data);    
+        // list[1] = data.trim().split('\r',' ','\r\n');
+        // list[1] = data.trim().split();
+        // console.log(list[1]);
+        // data = list[1].join();
+        // console.log(data);
+    });
+});
+
 function sub (event)  {
     event.preventDefault();
     document.getElementById("submit").disabled = true;
     console.log('form submitted');
-    let conns = [];
-    let comps = [];
-    let locs = [];
-    for (let i = 1; i <= 3; i++) {
-        if (document.getElementById(`${i}`).checked) {
-            conns.push(document.getElementById(`${i}`).value);
-        }
-    }
 
+    let profLinks = [];
     document.getElementById("ul1").querySelectorAll('li').forEach((item, index) => {
-        locs.push(item.innerText);
+        profLinks.push(item.innerText);
     });
 
-    document.getElementById("ul2").querySelectorAll('li').forEach((item, index) => {
-        comps.push(item.innerText);
-    });
-    conns = JSON.stringify(conns);
-    locs = JSON.stringify(locs);
-    comps = JSON.stringify(comps);
-    console.log(conns);
-    console.log(locs);
-    console.log(comps);
-    ipcRenderer.send("runexefile", [conns, locs, comps]);
+    profLinks = JSON.stringify(profLinks);
+    console.log(profLinks);
+
+    ipcRenderer.send("runexefile", ['./py/autoEndorser.exe',profLinks]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
-        // add row to table
-            
-        let down = document.createElement("a");
-        down.href =  "sendMessToPeopleOld.csv";
-        down.innerHTML ="Download";
-        down.type = "text/csv";
-        down.download = "sendMessToPeopleOld.csv";
-        down.style.color = "white";
-        down.style.textDecoration = "inherit";
-        let btn = document.createElement("button");
-        btn.className = "btn btn-success";
-        btn.style.marginBottom = "25px";
-        btn.appendChild(down);
-        document.querySelector('.table-wrapper').appendChild(btn);
-        let table = document.createElement('table');
-        let thead = document.createElement('thead');
-        let tbody = document.createElement('tbody');
-        table.appendChild(thead);
-        table.appendChild(tbody);
-        // Adding the entire table to the body tag
-        document.querySelector('.table-wrapper').appendChild(table);
-
-        // add heading to table 
-        let row_1 = document.createElement('tr');
-        let heading_1 = document.createElement('th');
-        heading_1.innerHTML = "No.";
-        let heading_2 = document.createElement('th');
-        heading_2.innerHTML = "Name";
-        let heading_3 = document.createElement('th');
-        heading_3.innerHTML = "Profile Link";
-        row_1.appendChild(heading_1);
-        row_1.appendChild(heading_2);
-        row_1.appendChild(heading_3);
-        thead.appendChild(row_1);
-
-
-        // add download csv file button 
-
-        // read csv file 
-
-        // const csvFilePath = 'connection/sendMessToPeopleOld.csv';
-        const csvFilePath = path.join(__dirname, 'sendMessToPeopleOld.csv');
-        ipcRenderer.send('readCsvFile', [csvFilePath]);
-        ipcRenderer.on('tableData', (event, arg) => {
-            console.log("got table data");
-            console.log(arg);
-            arg.forEach((row, index) => {
-                let row_2 = document.createElement('tr');
-                let row_2_data_1 = document.createElement('td');
-                row_2_data_1.innerHTML = index + 1;
-                let row_2_data_2 = document.createElement('td');
-                row_2_data_2.innerHTML = row.Name;
-                let row_2_data_3 = document.createElement('td');
-                row_2_data_3.innerHTML = row.Email;
-                row_2.appendChild(row_2_data_1);
-                row_2.appendChild(row_2_data_2);
-                row_2.appendChild(row_2_data_3);
-                tbody.appendChild(row_2);
-
-                // tbody.appendChild(`<tr><th>${index}<th><th>${row.Name}<th><th>${row.Email}<th></tr>`);
-            });
+        const title = "Endorsed successfully";
+        const bodyText = "All your connections are endorsed successfully.";
+        const notification = new Notification(title,{
+            body:bodyText,
         });
     });
-    // ipcRenderer.on('clo', (event, arg) => {
-    //     console.log(arg);
-    // })
 } 
 
 document.getElementById("refresh",()=>{
@@ -123,11 +92,7 @@ document.getElementById("refresh",()=>{
 
 document.getElementById("submit").addEventListener('click',sub );
 
-let list = [
-    [],
-    [],
-    [],
-]
+
 document.getElementById("b1").addEventListener("click", add1);
 document.getElementById("c1").addEventListener("click", clearList1);
 document.getElementById("ul1").addEventListener("click", remove1);
