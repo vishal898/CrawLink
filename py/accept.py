@@ -18,12 +18,9 @@ with open('src/accept/accept.csv', 'w+', newline='') as file:
     writer.writerow(['Link'])
 
 
-
-
-
 username = sys.argv[1]
 password = sys.argv[2]
-noOfUserTOAccept= json.loads(sys.argv[3])
+noOfUserTOAccept= int(float(sys.argv[3]))
 
 
 # username = "vishal.borse898@gmail.com"
