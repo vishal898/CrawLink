@@ -84,23 +84,8 @@ sleep(4)
 
 
 
-sleep(2)
-jobType = browser.find_element_by_xpath("(//button[normalize-space()='Job Type'])[1]").click()
-
-sleep(5)
-for i in jobTypeList:
-    sleep(5)
-    selJobType = browser.find_element_by_xpath(f"//label[contains(@for,'jobType-{i}')]")
-    sleep(2)
-    selJobType.click()
 
 sleep(2)
-filterJobType = browser.find_element_by_xpath("(//span[@class='artdeco-button__text'])[12]").click()
-sleep(4)
-browser.refresh
-sleep(4)
-
-
 company = browser.find_element_by_xpath("(//button[normalize-space()='Company'])[1]").click()
 sleep(2)
 
@@ -121,6 +106,23 @@ filterComp = browser.find_element_by_xpath("(//span[@class='artdeco-button__text
 sleep(7)
 filterComp.click()
 sleep(4)
+
+sleep(2)
+jobType = browser.find_element_by_xpath("(//button[normalize-space()='Job Type'])[1]").click()
+
+sleep(5)
+for i in jobTypeList:
+    sleep(5)
+    selJobType = browser.find_element_by_xpath(f"//label[contains(@for,'jobType-{i}')]")
+    sleep(2)
+    selJobType.click()
+
+sleep(2)
+filterJobType = browser.find_element_by_xpath("(//span[@class='artdeco-button__text'])[12]").click()
+sleep(4)
+browser.refresh
+sleep(4)
+
 
 
 

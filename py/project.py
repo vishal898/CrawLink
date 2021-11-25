@@ -25,8 +25,8 @@ with open('src/project/project.csv', 'w+', newline='') as file:
 
 username = sys.argv[1]
 password = sys.argv[2]
-noOfProject= int(float(sys.argv[3]))
-compList = json.loads(sys.argv[4])
+compList = json.loads(sys.argv[3])
+noOfProject= int(float(sys.argv[4]))
 
 
 

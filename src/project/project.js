@@ -76,7 +76,7 @@ function sub (event)  {
         let heading_1 = document.createElement('th');
         heading_1.innerHTML = "No.";
         let heading_2 = document.createElement('th');
-        heading_2.innerHTML = "Name";
+        heading_2.innerHTML = "Project Description";
         
         row_1.appendChild(heading_1);
         row_1.appendChild(heading_2);

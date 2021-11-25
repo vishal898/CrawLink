@@ -47,7 +47,7 @@ function sub (event)  {
     console.log(comps);
     console.log(cnt);
     
-    ipcRenderer.send("runexefile", ['./py/job.exe',conns, comps,cnt]);
+    ipcRenderer.send("runexefile", ['./py/job.exe',conns,cnt, comps]);
     ipcRenderer.on('filltable', (event, arg) => {
         console.log("exe file execution is over");
         const title = "Table is Created";
@@ -83,7 +83,7 @@ function sub (event)  {
         let heading_1 = document.createElement('th');
         heading_1.innerHTML = "No.";
         let heading_2 = document.createElement('th');
-        heading_2.innerHTML = "Link";
+        heading_2.innerHTML = "Job Description Link";
         
         row_1.appendChild(heading_1);
         row_1.appendChild(heading_2);
