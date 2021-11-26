@@ -66,7 +66,7 @@ browser.maximize_window()
 
 f.write('login done\n')
 
-while browser.current_url !="https://www.linkedin.com/feed":
+while browser.current_url !="https://www.linkedin.com/feed/":
     print('wait')
 
 sleep(3)

@@ -67,7 +67,7 @@ if noOfPeople<=25 and noOfPeople>0:
     # print(start)
 
     sleep(3)
-    while browser.current_url !="https://www.linkedin.com/feed":
+    while browser.current_url !="https://www.linkedin.com/feed/":
         print('wait')
     sleep(3)
         

@@ -64,7 +64,7 @@ sleep(3)
 browser.refresh()
 sleep(3)
 
-while browser.current_url !="https://www.linkedin.com/feed":
+while browser.current_url !="https://www.linkedin.com/feed/":
     print('wait')
 
 sleep(5)    

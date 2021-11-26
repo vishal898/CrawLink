@@ -14,7 +14,6 @@ import csv
 
 username = sys.argv[1]
 password = sys.argv[2]
-# lstOfProf = ['Dnyaneshwar Ware','devang kamble','vishal borse']
 # lstOfProf = ['https://www.linkedin.com/in/dnyaneshwar2023/','https://www.linkedin.com/in/vishal-borse-76b9a5190/','https://www.linkedin.com/in/devang-kamble/']
 lstOfProf = json.loads(sys.argv[3])
 # print(lstOfProf)
@@ -29,7 +28,7 @@ except:
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
         
 browser.get('https://www.linkedin.com/login')
-# browser.get('https://www.browserstack.com/guide/selenium-scroll-tutorial')
+
 
 sleep(2)
 browser.maximize_window()
@@ -44,7 +43,7 @@ sleep(2)
 signIn = browser.find_element_by_xpath("(//button[normalize-space()='Sign in'])[1]")
 signIn.click()
 
-while browser.current_url !="https://www.linkedin.com/feed":
+while browser.current_url !="https://www.linkedin.com/feed/":
     print('wait')
 
 # print(start)

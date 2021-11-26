@@ -65,7 +65,7 @@ sleep(2)
 signIn = browser.find_element_by_xpath("(//button[normalize-space()='Sign in'])[1]")
 signIn.click()
 
-while browser.current_url !="https://www.linkedin.com/feed":
+while browser.current_url !="https://www.linkedin.com/feed/":
     print('wait')
 
 
