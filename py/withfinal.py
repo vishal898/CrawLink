@@ -49,7 +49,7 @@ if noOfPeople<=25 and noOfPeople>0:
         except:
             browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
             
-    browser.get('https://www.linkedin.com')
+    browser.get('https://www.linkedin.com/login')
 
     sleep(2)
     browser.maximize_window()

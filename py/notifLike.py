@@ -46,7 +46,7 @@ except:
 
 
 
-browser.get('https://www.linkedin.com')
+browser.get('https://www.linkedin.com/login')
 sleep(3)
 browser.refresh()
 sleep(3)

@@ -28,7 +28,7 @@ except:
     except:
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
         
-browser.get('https://www.linkedin.com')
+browser.get('https://www.linkedin.com/login')
 # browser.get('https://www.browserstack.com/guide/selenium-scroll-tutorial')
 
 sleep(2)

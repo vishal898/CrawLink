@@ -40,7 +40,7 @@ except:
 
 
  
-browser.get('https://www.linkedin.com')
+browser.get('https://www.linkedin.com/login')
 
 sleep(5)
 browser.maximize_window()
