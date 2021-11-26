@@ -75,7 +75,7 @@ def addToSheet(person):
 
 
 
-while browser.current_url !="https://www.linkedin.com/feed/?trk=homepage-basic_signin-form_submit":
+while browser.current_url !="https://www.linkedin.com/feed":
     print('wait')
 
 # print(start)

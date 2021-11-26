@@ -51,10 +51,10 @@ sleep(3)
 sleep(5)
 browser.maximize_window()
 sleep(10)
-userid = browser.find_element_by_xpath(".//*[@id='session_key']")
+userid = browser.find_element_by_xpath("(//input[@name='session_key'])[1]")
 userid.send_keys(username)
 sleep(2)
-userpass = browser.find_element_by_xpath(".//*[@id='session_password']")
+userpass = browser.find_element_by_xpath("(//input[@name='session_password'])[1]")
 userpass.send_keys(password)
 sleep(2)
 signIn = browser.find_element_by_xpath("(//button[normalize-space()='Sign in'])[1]")
@@ -64,7 +64,7 @@ sleep(3)
 browser.refresh()
 sleep(3)
 
-while browser.current_url !="https://www.linkedin.com/feed/?trk=homepage-basic_signin-form_submit":
+while browser.current_url !="https://www.linkedin.com/feed":
     print('wait')
 
 sleep(5)    
