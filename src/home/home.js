@@ -10,13 +10,14 @@ document.getElementById("2").addEventListener('click',()=>{
     console.log('card cliked');
     ipcRenderer.send("renderPage",[{page:'withdraw/withdraw.html'}]);
 });
-document.getElementById("3").addEventListener('click',()=>{
-    console.log('card cliked');
-    ipcRenderer.send("renderPage",[{page:'accept/accept.html'}]);
-});
+
 document.getElementById("4").addEventListener('click',()=>{
     console.log('card cliked');
     ipcRenderer.send("renderPage",[{page:'notification/notification.html'}]);
+});
+document.getElementById("3").addEventListener('click',()=>{
+    console.log('card cliked');
+    ipcRenderer.send("renderPage",[{page:'accept/accept.html'}]);
 });
 document.getElementById("5").addEventListener('click',()=>{
     console.log('card cliked');
