@@ -21,7 +21,7 @@ with open('src/job/job.csv', 'w+', newline='') as file:
 
 username = sys.argv[1]
 password = sys.argv[2]
-jobTypeList = json.loads(sys.argv[3])
+jobTypeList = json.loads(sys.argv[3])   
 noOfComp=int(float(sys.argv[4]))
 compList = json.loads(sys.argv[5])
 
@@ -35,8 +35,6 @@ except:
         browser =  webdriver.Edge(EdgeChromiumDriverManager().install())
     except:
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-
-
 
 
  
@@ -61,10 +59,10 @@ while browser.current_url !="https://www.linkedin.com/feed/":
 
 sleep(5)
 try:
-	downButton= browser.find_element_by_xpath("(//li-icon[@type='chevron-down-icon'])[4]")
-	downButton.click()
+    downButton= browser.find_element_by_xpath("(//li-icon[@type='chevron-down-icon'])[4]")
+    downButton.click()
 except:
-	print('no down button')
+    print('no down button')
 
 
 
@@ -102,7 +100,7 @@ for i in compList:
     sleep(5)
 
 sleep(7)
-filterComp = browser.find_element_by_xpath("(//span[@class='artdeco-button__text'])[12]")
+filterComp = browser.find_element_by_xpath("(//span[@class='artdeco-button__text'])[10]")
 sleep(7)
 filterComp.click()
 sleep(4)
@@ -112,10 +110,14 @@ jobType = browser.find_element_by_xpath("(//button[normalize-space()='Job Type']
 
 sleep(5)
 for i in jobTypeList:
-    sleep(5)
-    selJobType = browser.find_element_by_xpath(f"//label[contains(@for,'jobType-{i}')]")
-    sleep(2)
-    selJobType.click()
+
+    try:
+        sleep(7)
+        selJobType = browser.find_element_by_xpath(f"//label[contains(@for,'jobType-{i}')]")
+        sleep(5)
+        selJobType.click()
+    except:
+        print("no such")
 
 sleep(2)
 filterJobType = browser.find_element_by_xpath("(//span[@class='artdeco-button__text'])[12]").click()
@@ -134,13 +136,13 @@ cnt=0
 
 
 def funForClick():
-		sleep(5)
-		print(browser.current_url)
-		link=browser.current_url
-		profile=[link]
-		addToSheet(profile)
-		browser.back()
-		return
+        sleep(5)
+        print(browser.current_url)
+        link=browser.current_url
+        profile=[link]
+        addToSheet(profile)
+        browser.back()
+        return
 
 
 while cnt < noOfComp:
@@ -158,7 +160,4 @@ while cnt < noOfComp:
 
 
 browser.close();
-
-
-
 
