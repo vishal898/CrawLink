@@ -22,7 +22,7 @@ function sub (event)  {
     let comps = [];
     let locs = [];
     let mess = ""; 
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 2; i <= 3; i++) {
         if (document.getElementById(`${i}`).checked) {
             conns.push(document.getElementById(`${i}`).value);
         }
