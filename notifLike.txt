@@ -1,5 +1,0 @@
-started notifLike.py
-testingselenium35@gmail.com
-kala#123
-10
-login done

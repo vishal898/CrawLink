@@ -155,7 +155,7 @@ def funOnProfile():
              sleep(5)
              try : 
                  sleep(5)
-                 proj=browser.find_element_by_xpath("(//h3[normalize-space()='Projects'])[1]")
+                 proj=browser.find_element_by_xpath("(//h3[@id='projects-title'])[1]")
                  print(proj.text)
                  sleep(5)
                  funForProject();
